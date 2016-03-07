@@ -37,8 +37,8 @@
   <div flex="70">
     <div class="angular-google-map-container">
       <ui-gmap-google-map options="eventsList.map.options" center="eventsList.map.center" zoom="eventsList.map.zoom" flex layout="row">
-        <ui-gmap-markers models="eventsList.events" coords="'eventPositions[0]'"
-        fit="eventsList.map.fit" idkey="'_id'" doRebuildAll="true"></ui-gmap-markers>
+        <ui-gmap-markers models="eventsList.events" coords="'eventPositions[0]'" idkey="'_id'" doRebuildAll="true"></ui-gmap-markers>
+        <ui-gmap-polyline ng-repeat="event in eventsList.events" path="event.eventPositions" static="true"></ui-gmap-polyline>
       </ui-gmap-google-map>
     </div>
   </div>

@@ -6,7 +6,7 @@ angular.module('gmaps-live').directive('eventsList', function () {
     link: function($scope, element) {
       element.css('width', '100%');
     },
-    controller: function ($scope, $reactive) {
+    controller: function ($scope, $reactive, uiGmapGoogleMapApi) {
       $reactive(this).attach($scope);
 
       this.newEvent = {};
@@ -16,9 +16,8 @@ angular.module('gmaps-live').directive('eventsList', function () {
           latitude: 45,
           longitude: -73
         },
-        zoom: 8,
-        fit: true
-      };
+        zoom: 8
+      }
 
       this.subscribe('events');
 
@@ -30,15 +29,17 @@ angular.module('gmaps-live').directive('eventsList', function () {
 
       this.addEvent = () => {
         Events.insert(this.newEvent);
-        this.showEvent(this.newEvent);
         this.newEvent = {};
       };
 
       this.showEvent = (event) => {
-        this.map.center = event.eventPositions[0];
-        this.map.fit = false;
+        this.map.center = Object.create(event.eventPositions[0]);
         this.map.zoom = 16;
       }
+
+      uiGmapGoogleMapApi.then(function(maps) {
+
+      });
     }
   }
 });
