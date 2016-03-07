@@ -2,7 +2,8 @@ angular.module('gmaps-live', [
   'angular-meteor',
   'ui.router',
   'ngMaterial',
-  'uiGmapgoogle-maps'
+  'uiGmapgoogle-maps',
+  'ngMessages'
 ]);
 
 angular.module('gmaps-live').config(($mdIconProvider) => {

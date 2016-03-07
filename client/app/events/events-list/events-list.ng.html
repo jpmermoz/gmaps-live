@@ -1,21 +1,31 @@
 <div layout="row" class="ng-scope layout-row">
   <div flex="30">
-    <form name="eventForm" layout-padding novalidate ng-submit="eventsList.addEvent()">
+    <form name="eventForm" layout-padding novalidate ng-submit="eventForm.$valid && eventsList.addEvent()">
       <md-input-container class="md-icon-float md-block">
         <md-icon>description</md-icon>
-        <input type="text" ng-required="true" ng-model="eventsList.newEvent.description" placeholder="Event Description" />
+        <input name="description" required="" type="text" ng-model="eventsList.newEvent.description" placeholder="Event Description" />
+        <div ng-messages="eventForm.description.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
       </md-input-container>
       <md-input-container class="md-block">
         <md-icon>place</md-icon>
-        <input type="number" required step="any" ng-model="eventsList.newEvent.location.latitude" placeholder="Event Latitude" />
+        <input name="latitude" required="" type="number" step="any" ng-model="eventsList.newEvent.eventPositions[0].latitude" placeholder="Event Latitude" />
+        <div ng-messages="eventForm.latitude.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
       </md-input-container>
       <md-input-container class="md-block">
         <md-icon>place</md-icon>
-        <input type="number" required step="any" ng-model="eventsList.newEvent.location.longitude" placeholder="Event Longitude" />
+        <input name="longitude" required="" type="number" step="any" ng-model="eventsList.newEvent.eventPositions[0].longitude" placeholder="Event Longitude" />
+        <div ng-messages="eventForm.longitude.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
       </md-input-container>
       <button class="md-raised md-primary md-button md-ink-ripple">Add Event</button>
     </form>
 
+    <div>{{ eventsList.newEvent }}</div>
     <md-list>
       <md-subheader class="md-no-sticky">Events</md-subheader>
       <md-list-item class="secondary-button-padding" ng-repeat="event in eventsList.events" ng-click="eventsList.showEvent(event)">
@@ -27,7 +37,7 @@
   <div flex="70">
     <div class="angular-google-map-container">
       <ui-gmap-google-map options="eventsList.map.options" center="eventsList.map.center" zoom="eventsList.map.zoom" flex layout="row">
-        <ui-gmap-markers models="eventsList.events" coords="'location'"
+        <ui-gmap-markers models="eventsList.events" coords="'eventPositions[0]'"
         fit="eventsList.map.fit" idkey="'_id'" doRebuildAll="true"></ui-gmap-markers>
       </ui-gmap-google-map>
     </div>

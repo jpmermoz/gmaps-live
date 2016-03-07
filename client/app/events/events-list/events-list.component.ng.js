@@ -1,7 +1,7 @@
 angular.module('gmaps-live').directive('eventsList', function () {
   return {
     restrict: 'E',
-    templateUrl: 'client/events/events-list/events-list.ng.html',
+    templateUrl: 'client/app/events/events-list/events-list.ng.html',
     controllerAs: 'eventsList',
     link: function($scope, element) {
       element.css('width', '100%');
@@ -9,7 +9,7 @@ angular.module('gmaps-live').directive('eventsList', function () {
     controller: function ($scope, $reactive) {
       $reactive(this).attach($scope);
 
-      this.newEvent = new Event();
+      this.newEvent = {};
 
       this.map = {
         center: {
@@ -29,14 +29,13 @@ angular.module('gmaps-live').directive('eventsList', function () {
       });
 
       this.addEvent = () => {
-        if (this.newEvent.validate()) {
-          this.newEvent.save();
-          this.newEvent = new Event();
-        }
+        Events.insert(this.newEvent);
+        this.showEvent(this.newEvent);
+        this.newEvent = {};
       };
 
       this.showEvent = (event) => {
-        this.map.center = event.location;
+        this.map.center = event.eventPositions[0];
         this.map.fit = false;
         this.map.zoom = 16;
       }

@@ -21,5 +21,4 @@ angularui:angular-ui-router
 angular:angular-material
 angularui:angular-google-maps
 planettraining:material-design-icons
-jagi:astronomy
-jagi:astronomy-validators
+angular:angular-messages
