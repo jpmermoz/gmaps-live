@@ -6,10 +6,7 @@ angular.module('gmaps-live')
   .state('events', {
     url: '/events',
     template: '<events-list></events-list>'
-  })
-  .state('addEvent', {
-    url: '/events/add',
-    template: '<events-add></events-add>'
   });
+  
   $urlRouterProvider.otherwise("/events");
 });
