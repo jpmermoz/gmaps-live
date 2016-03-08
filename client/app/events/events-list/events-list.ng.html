@@ -25,7 +25,6 @@
       <button class="md-raised md-primary md-button md-ink-ripple">Add Event</button>
     </form>
 
-    <div>{{ eventsList.newEvent }}</div>
     <md-list>
       <md-subheader class="md-no-sticky">Events</md-subheader>
       <md-list-item class="secondary-button-padding" ng-repeat="event in eventsList.events" ng-click="eventsList.showEvent(event)">
